@@ -148,26 +148,53 @@ function mouseExe() {
   if (mouseIsPressed) {
     if (!mouseStatut) {
       mouseStatut = 1;
+
       if (play) {
-        if (game_over) {
-          if ((wW * 50 / 100 - 50 < mouseX && mouseX < wW * 50 / 100 + 50) && (wH * 50 / 100 + 60 < mouseY && mouseY < wH * 50 / 100 + 90)) {
-            reset();
-            play = 1;
-          }
-        } else {
-          if (mouseX > wW * 4 / 5 - 50 && mouseY < 50) {
-            if (pause) {
-              pause = 0;
+          if (game_over) {
+            if ((wW*50/100-50 < mouseX && mouseX < wW*50/100+50) && (wH*50/100+60 < mouseY && mouseY < wH*50/100+90)) {
+              reset();
+              play = 1;
+            }
+          } else {
+            if (mouseX > wW*4/5-50 && mouseY < 50) {
+              if (pause) {
+                pause = 0;
+              } else {
+                pause = 1;
+              }
             } else {
-              pause = 1;
+              if (!pause) {
+                if (mouseY < wH - 51) {
+                  if (mouseX < wW*50/100) {
+                    if (xP > wW*1/3) {
+                      xP -= wW/3;
+                    }
+                  } else {
+                    if (xP < wW*2/3) {
+                      xP += wW/3;
+                    }
+                  }
+                } else {
+                  if (mouseX < wW*50/100) {
+                    stateP -=1
+                    if (stateP < 1) {
+                      stateP = 3;
+                    }
+                  } else {
+                    stateP +=1
+                    if (stateP > 3) {
+                      stateP = 1;
+                    }
+                  }
+                }
+              }
             }
           }
+        } else {
+          if (wW*50/100-40 < mouseX && mouseX < wW*50/100+40 && wH*50/100-40 < mouseY && mouseY < wH*50/100+40) {
+            play = 1;
+          }
         }
-      } else {
-        if (wW * 50 / 100 - 40 < mouseX && mouseX < wW * 50 / 100 + 40 && wH * 50 / 100 - 40 < mouseY && mouseY < wH * 50 / 100 + 40) {
-          play = 1;
-        }
-      }
     }
   } else {
     mouseStatut = 0;
